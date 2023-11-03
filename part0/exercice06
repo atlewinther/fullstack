@@ -1,17 +1,18 @@
-Note right of browser: Information goes from text/form. 
-                       When clicked on save, spa.js obtains data from the element by ID. 
-                       It now creates a new object and sends the new object to the server in the request body as JSON.
+sequenceDiagram
+    participant browser
+    participant server
 
-Data into text/form. When clicked on save spa.js gets from element by id 
-and prevent default handling 
-to render notes, creates new object
-with content and date and 
-pushes it to notes array, redraw 
-notes, sends new object to server
-in request body as JSON
+    Note right of browser: User enters information in text form and clicks save
 
-browser-->server: GET https://studies.cs.helsinki.fi/exampleapp/new_note_spa
-activate server
-server->>browser: Status 201 - Created
-server->>browser: message: "note created"
-deactivate server
+    browser->>browser: Get data from form element by ID
+    browser->>browser: Create new object with content and date
+    browser->>browser: Prevent default form submission
+    browser->>browser: Push new object to notes array
+    browser->>browser: Redraw notes with updated data
+    browser-->browser: Send new object to server in request body as JSON
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    activate server
+    server-->>browser: Status 201 - Created
+    server-->>browser: message: "note created"
+    deactivate server
