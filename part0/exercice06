@@ -11,7 +11,7 @@ sequenceDiagram
     browser->>browser: Redraw notes with updated data
     browser-->browser: Send new object to server in request body as JSON
 
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    browser->>server: POST /exampleapp/new_note_spa
     activate server
     server-->>browser: Status 201 - Created
     server-->>browser: message: "note created"
