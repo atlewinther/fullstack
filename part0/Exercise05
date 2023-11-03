@@ -1,0 +1,15 @@
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+activate server
+server->>browser: Status 200 - HTML file
+deactivate server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+activate server
+server->>browser: Status 304 - CSS file
+deactivate server
+
+browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+activate server
+server->>browser: Status 200 - JS file
+deactivate server
+
