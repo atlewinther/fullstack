@@ -1,24 +1,29 @@
-browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
-activate server
-server->>browser: Status 200 - HTML file
-deactivate server
+sequenceDiagram
+    participant browser
+    participant server
 
-browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
-activate server
-server->>browser: Status 304 - CSS file
-deactivate server
+    Note right of browser: Browser requests SPA and related files from the server
 
-browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
-activate server
-server->>browser: Status 200 - JS file
-deactivate server
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: Status 200 - OK (HTML file)
+    deactivate server
 
-Note right of browser: Browser executes spa.js and request data from data.json which is on the server
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: Status 304 - Not Modified (CSS file)
+    deactivate server
 
-browser-->server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
-activate server
-server->>browser: Status 304 -   [{"content": "Brøndby er de bedste", "date": "2023-11-03T20:48:21.695Z"}]
-deactivate server
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server-->>browser: Status 200 - OK (JS file)
+    deactivate server
 
-Note right of browser: Browser executes notes and display notes
+    Note right of browser: Browser executes spa.js and requests data from data.json on the server
 
+    browser-->server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: Status 304 - Not Modified (JSON data)
+    deactivate server
+
+    Note right of browser: Browser processes data from data.json and displays notes
