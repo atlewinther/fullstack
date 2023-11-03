@@ -4,24 +4,24 @@ sequenceDiagram
 
     Note right of browser: Browser requests SPA and related files from the server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    browser->>server: GET /exampleapp/spa
     activate server
     server-->>browser: Status 200 - OK (HTML file)
     deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    browser->>server: GET /exampleapp/main.css
     activate server
     server-->>browser: Status 304 - Not Modified (CSS file)
     deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+    browser->>server: GET /exampleapp/spa.js
     activate server
     server-->>browser: Status 200 - OK (JS file)
     deactivate server
 
     Note right of browser: Browser executes spa.js and requests data from data.json on the server
 
-    browser-->server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    browser-->server: GET exampleapp/data.json
     activate server
     server-->>browser: Status 304 - Not Modified (JSON data)
     deactivate server
