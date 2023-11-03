@@ -2,33 +2,34 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note right of browser: Browser sending data (in this case "Brøndby er de bedste") to the server
+    Note right of browser: Browser sends request to the server
     
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/new_note
+    browser->>server: GET /exampleapp/new_note
     activate server
-    server-->>browser: Status 302 - redirect to notes
+    server-->>browser: Status 302 - Redirect to /exampleapp/notes
     deactivate server
     
-
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    browser->>server: GET /exampleapp/notes
     activate server
-    server-->>browser: Status 304 - HTML file
+    server-->>browser: Status 304 - Not Modified
     deactivate server
-
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    
+    browser->>server: GET /exampleapp/main.css
     activate server
-    server-->>browser: Status 304 - CSS file
+    server-->>browser: Status 304 - Not Modified
     deactivate server
-
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    
+    browser->>server: GET /exampleapp/main.js
     activate server
-    server-->>browser: Status 304 - JavaScript file
+    server-->>browser: Status 304 - Not Modified
     deactivate server
-
-    Note right of browser: The browser starts executing the main.jsthat fetches the JSON(data.json) from the server
-
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    
+    Note right of browser: Browser fetches JSON data from the server
+    
+    browser->>server: GET /exampleapp/data.json
     activate server
     server-->>browser: Status 200 - [{"content": "Brøndby er de bedste", "date": "2023-11-03T20:48:21.695Z"}]
+    deactivate server
+    
+    Note right of browser: Browser processes the new note data
 
-    Note right of browser: The browser now executes the data from the new note
